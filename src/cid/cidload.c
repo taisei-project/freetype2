@@ -146,10 +146,11 @@
   }
 
 
-  FT_CALLBACK_DEF( FT_Error )
+  FT_CALLBACK_DEF( void )
   cid_parse_font_matrix( CID_Face     face,
                          CID_Parser*  parser )
   {
+    FT_Error      error = FT_Err_Ok;
     CID_FaceDict  dict;
     FT_Face       root = (FT_Face)&face->root;
     FT_Fixed      temp[6];
@@ -171,14 +172,18 @@
       result = cid_parser_to_fixed_array( parser, 6, temp, 3 );
 
       if ( result < 6 )
-        return FT_THROW( Invalid_File_Format );
+      {
+        error = FT_THROW( Invalid_File_Format );
+        goto Exit;
+      }
 
       temp_scale = FT_ABS( temp[3] );
 
       if ( temp_scale == 0 )
       {
         FT_ERROR(( "cid_parse_font_matrix: invalid font matrix\n" ));
-        return FT_THROW( Invalid_File_Format );
+        error = FT_THROW( Invalid_File_Format );
+        goto Exit;
       }
 
       /* atypical case */
@@ -205,11 +210,12 @@
       offset->y  = temp[5] >> 16;
     }
 
-    return FT_Err_Ok;
+Exit:
+    return /* error */;
   }
 
 
-  FT_CALLBACK_DEF( FT_Error )
+  FT_CALLBACK_DEF( void )
   parse_fd_array( CID_Face     face,
                   CID_Parser*  parser )
   {
@@ -275,7 +281,7 @@
     }
 
   Exit:
-    return error;
+    return /* error */;
   }
 
 
@@ -283,7 +289,7 @@
   /* and CID_FaceDictRec (both are public header files and can't  */
   /* changed); we simply copy the value                           */
 
-  FT_CALLBACK_DEF( FT_Error )
+  FT_CALLBACK_DEF( void )
   parse_expansion_factor( CID_Face     face,
                           CID_Parser*  parser )
   {
@@ -298,7 +304,7 @@
       dict->private_dict.expansion_factor = dict->expansion_factor;
     }
 
-    return FT_Err_Ok;
+    return /* FT_Err_Ok */;
   }
 
 

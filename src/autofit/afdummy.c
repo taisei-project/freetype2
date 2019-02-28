@@ -38,9 +38,10 @@
 
 
   static FT_Error
-  af_dummy_hints_apply( FT_UInt        glyph_index,
-                        AF_GlyphHints  hints,
-                        FT_Outline*    outline )
+  af_dummy_hints_apply( FT_UInt         glyph_index,
+                        AF_GlyphHints   hints,
+                        FT_Outline*     outline,
+                        AF_StyleMetrics metrics )
   {
     FT_Error  error;
 
