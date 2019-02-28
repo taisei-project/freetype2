@@ -154,10 +154,11 @@
   }
 
 
-  FT_CALLBACK_DEF( FT_Error )
+  FT_CALLBACK_DEF( void )
   cid_parse_font_matrix( CID_Face     face,
                          CID_Parser*  parser )
   {
+    FT_Error      error = FT_Err_Ok;
     CID_FaceDict  dict;
     FT_Face       root = (FT_Face)&face->root;
     FT_Fixed      temp[6];
@@ -179,7 +180,10 @@
       result = cid_parser_to_fixed_array( parser, 6, temp, 3 );
 
       if ( result < 6 )
-        return FT_THROW( Invalid_File_Format );
+      {
+        error = FT_THROW( Invalid_File_Format );
+        goto Exit;
+      }
 
       FT_TRACE4(( " [%f %f %f %f %f %f]\n",
                   (double)temp[0] / 65536 / 1000,
@@ -194,7 +198,8 @@
       if ( temp_scale == 0 )
       {
         FT_ERROR(( "cid_parse_font_matrix: invalid font matrix\n" ));
-        return FT_THROW( Invalid_File_Format );
+        error = FT_THROW( Invalid_File_Format );
+        goto Exit;
       }
 
       /* atypical case */
@@ -228,11 +233,12 @@
       offset->y  = temp[5] >> 16;
     }
 
-    return FT_Err_Ok;
+Exit:
+    return /* error */;
   }
 
 
-  FT_CALLBACK_DEF( FT_Error )
+  FT_CALLBACK_DEF( void )
   parse_fd_array( CID_Face     face,
                   CID_Parser*  parser )
   {
@@ -304,7 +310,7 @@
     }
 
   Exit:
-    return error;
+    return /* error */;
   }
 
 
@@ -312,7 +318,7 @@
   /* and CID_FaceDictRec (both are public header files and can't  */
   /* changed).  We simply copy the value.                         */
 
-  FT_CALLBACK_DEF( FT_Error )
+  FT_CALLBACK_DEF( void )
   parse_expansion_factor( CID_Face     face,
                           CID_Parser*  parser )
   {
@@ -329,7 +335,7 @@
       FT_TRACE4(( "%d\n", dict->expansion_factor ));
     }
 
-    return FT_Err_Ok;
+    return /* FT_Err_Ok */;
   }
 
 
@@ -337,7 +343,7 @@
   /* `FontName' keyword.  FreeType doesn't need it, but it is nice */
   /* to catch it for producing better trace output.                */
 
-  FT_CALLBACK_DEF( FT_Error )
+  FT_CALLBACK_DEF( void )
   parse_font_name( CID_Face     face,
                    CID_Parser*  parser )
   {
@@ -361,7 +367,7 @@
     FT_UNUSED( parser );
 #endif
 
-    return FT_Err_Ok;
+    return /* FT_Err_Ok */;
   }
 
 

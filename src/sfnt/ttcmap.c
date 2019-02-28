@@ -3306,7 +3306,7 @@
   }
 
 
-  FT_CALLBACK_DEF( FT_Int )
+  FT_CALLBACK_DEF( FT_Bool )
   tt_cmap14_char_var_isdefault( TT_CMap    cmap,
                                 FT_UInt32  charcode,
                                 FT_UInt32  variantSelector )

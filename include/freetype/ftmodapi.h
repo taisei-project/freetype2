@@ -622,8 +622,11 @@ FT_BEGIN_HEADER
    *     structure (which depends on the font module).  For TrueType fonts
    *     it is bytecode interpreter's execution context, `TT_ExecContext`,
    *     which is declared in FreeType's internal header file `tttypes.h`.
+   *
+   * @return:
+   *   The return value is currently ignored.
    */
-  typedef void
+  typedef FT_Error
   (*FT_DebugHook_Func)( void*  arg );
 
 
