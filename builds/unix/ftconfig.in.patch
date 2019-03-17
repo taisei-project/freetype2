@@ -1,0 +1,17 @@
+35a36
+> /* MESON: based on unix/ftconfig.in with but meson-friendly configuration defines */
+60,62c61,63
+< #undef HAVE_UNISTD_H
+< #undef HAVE_FCNTL_H
+< #undef HAVE_STDINT_H
+---
+> #define HAVE_UNISTD_H @HAVE_UNISTD_H@
+> #define HAVE_FCNTL_H @HAVE_FCNTL_H@
+> #define HAVE_STDINT_H @HAVE_STDINT_H@
+155c156
+< /undef FT_MACINTOSH
+---
+> #undef FT_MACINTOSH
+495a497,498
+> #elif defined( __SUNPRO_C ) && __SUNPRO_C >= 0x550
+> #define FT_EXPORT( x )  __global  x
