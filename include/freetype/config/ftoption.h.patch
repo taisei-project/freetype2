@@ -1,0 +1,16 @@
+221c221
+< /* #define FT_CONFIG_OPTION_SYSTEM_ZLIB */
+---
+> #mesondefine FT_CONFIG_OPTION_SYSTEM_ZLIB
+241c241
+< /* #define FT_CONFIG_OPTION_USE_BZIP2 */
+---
+> #mesondefine FT_CONFIG_OPTION_USE_BZIP2
+270c270
+< /* #define FT_CONFIG_OPTION_USE_PNG */
+---
+> #mesondefine FT_CONFIG_OPTION_USE_PNG
+287c287
+< /* #define FT_CONFIG_OPTION_USE_HARFBUZZ */
+---
+> #mesondefine FT_CONFIG_OPTION_USE_HARFBUZZ
