@@ -119,9 +119,11 @@ zlib_dep = dependency('zlib', fallback : ['zlib', 'zlib_dep'])
 conf.set('FT_CONFIG_OPTION_SYSTEM_ZLIB', 1)
 deps += [zlib_dep]
 
-png_dep = dependency('libpng', fallback : ['libpng', 'png_dep'])
-conf.set('FT_CONFIG_OPTION_USE_PNG', 1)
-deps += [png_dep]
+if get_option('use_asm')
+    conf.set('FT_CONFIG_OPTION_INLINE_MULFIX', false)
+else
+    conf.set('FT_CONFIG_OPTION_NO_ASSEMBLER', true)
+endif
 
 configure_file(
     input : ftconfig_h_in,

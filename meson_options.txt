@@ -1,0 +1,7 @@
+
+option(
+    'use_asm',
+    type : 'boolean',
+    value : true,
+    description : 'Try to use assembly optimizations if possible'
+)
