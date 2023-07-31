@@ -65,7 +65,7 @@ ftmodule_h = custom_target('ftmodule.h',
   input: 'modules.cfg',
   command: [python_exe, files('builds/meson/parse_modules_cfg.py'),
             '--format=ftmodule.h', '@INPUT@', '--output', '@OUTPUT@'],
-  install: true,
+  install: not meson.is_subproject(),
   install_dir: join_paths(freetype_includedir, 'freetype/config'),
 )
 ft2_sources = [ftmodule_h]
@@ -410,7 +410,7 @@ ftoption_h = custom_target('ftoption.h',
   input: 'include/freetype/config/ftoption.h',
   output: 'ftoption.h',
   command: ftoption_command,
-  install: true,
+  install: not meson.is_subproject(),
   install_dir: join_paths(freetype_includedir, 'freetype/config'),
 )
 ft2_sources += ftoption_h
@@ -439,7 +439,7 @@ if use_unix_ftsystem_c
     input: ftconfig_h_in,
     output: 'ftconfig.h',
     command: ftconfig_command,
-    install: true,
+    install: not meson.is_subproject(),
     install_dir: join_paths(freetype_includedir, 'freetype/config'),
   )
   ft2_sources += ftconfig_h
@@ -453,7 +453,7 @@ ft2_lib = library('freetype',
   gnu_symbol_visibility: 'hidden',
   include_directories: ft2_includes,
   dependencies: ft2_deps,
-  install: true,
+  install: not meson.is_subproject(),
   version: ft2_so_version,
   link_args: common_ldflags,
 )
