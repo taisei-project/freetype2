@@ -424,6 +424,7 @@ freetype_dep = declare_dependency(
 
 meson.override_dependency('freetype2', freetype_dep)
 
+if not meson.is_subproject()
 
 # NOTE: Using both `install_dir` and `subdir` doesn't seem to work
 # below, i.e., the `subdir` value seems to be ignored, contrary to
@@ -450,6 +451,8 @@ pkgconfig.generate(ft2_lib,
   subdirs: 'freetype2',
   version: ft2_pkgconfig_version,
 )
+
+endif
 
 if get_option('tests').enabled()
   subdir('tests')
