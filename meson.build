@@ -319,7 +319,7 @@ else
 endif
 
 # BZip2 support.
-bzip2_dep = dependency('bzip2', required: false)
+bzip2_dep = dependency('bzip2', required: get_option('bzip2'))
 if not bzip2_dep.found()
   bzip2_dep = cc.find_library('bz2',
     has_headers: ['bzlib.h'],
